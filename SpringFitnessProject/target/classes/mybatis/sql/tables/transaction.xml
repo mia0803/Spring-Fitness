@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="transactionSqlDAO">
+ 
+ 	<select id="checkPayment" resultType="TransactionDTO" parameterType="int">
+	select * from transaction where member_id=#{member_id}
+	</select>
+ 	
+ 	<insert id="addTransaction" parameterType="TransactionDTO">
+ 	insert into transaction values(7,#{member_id},#{payment_info_id},#{amount},#{title},#{membership},sysdate,#{initiation_fee},0)
+ 	</insert>
+ 	
+ 	<select id="getTransactions" resultType="TransactionDTO">
+	select * from transaction order by id desc
+	</select>
+	
+	<update id="refundTransaction" parameterType="int">
+	update transaction set refund_check = 1 where id = #{id}
+	</update>
+	
+	<select id="getTransactionInfo" resultType="TransactionDTO" parameterType="int">
+	select * from transaction where id = #{id}
+	</select>
+	
+	
+	
+	
+	
+	
+ 
+</mapper>
+  
+  
+  
+  
+  
+  
+  
+  

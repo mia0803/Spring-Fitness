@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="memberSqlDAO">
+
+	<update id="updatePw" parameterType="MemberDTO">
+	update members set pw=#{pw} where email=#{email}
+	</update>
+	
+	<select id="getPw" resultType="String" parameterType="MemberDTO">
+	select pw from members where email=#{email} and phone=#{phone}
+	</select>
+	
+	<select id="getEmail" resultType="String" parameterType="MemberDTO">
+	select email from members where phone=#{phone} and fname=#{fname} and lname=#{lname}
+	</select>
+	
+	<insert id="addMember" parameterType="MemberDTO">
+	insert into members values(7,#{pw},#{fname},#{lname},#{email},#{phone},#{membership},0,0,sysdate,'basic_user.png',#{club},#{location},#{payment},0)
+	</insert>
+	
+	<select id="getId" resultType="int" parameterType="String">
+	select id from members where email=#{email}
+	</select>
+	
+	<select id="checkLogin" resultType="MemberDTO" parameterType="MemberDTO">
+	select * from members where email=#{email} and pw=#{pw}
+	</select>
+	
+	<select id="getAllMembers" resultType="MemberDTO">
+	select * from members where teacher=0 and admin=0
+	</select>
+	
+	<select id="getMember" resultType="MemberDTO" parameterType="String">
+	select * from members where email=#{email}
+	</select>
+	
+	<update id="deactivateMember" parameterType="int">
+	update members set deactivate=1 where id=#{id}
+	</update>
+	
+	<update id="activateMember" parameterType="int">
+	update members set deactivate=0 where id=#{id}
+	</update>
+	
+	<select id="getTeachers" resultType="MemberDTO">
+	select * from members where teacher=1
+	</select>
+	
+	<update id="updateMember" parameterType="MemberDTO">
+	update members set pw=#{pw},fname=#{fname},lname=#{lname},phone=#{phone},profile=#{profile} where id=#{id}
+	</update>
+	
+	<update id="updateMemberMembership" parameterType="MemberDTO">
+	update members set membership=#{membership},club=#{club},location=#{location},payment=#{payment} where id=#{id}
+	</update>
+	
+	<select id="phoneValidation" resultType="MemberDTO" parameterType="String">
+	select * from members where phone=#{phone}
+	</select>
+	
+	<select id="emailValidation" resultType="MemberDTO" parameterType="String">
+	select * from members where email=#{email}
+	</select>
+	
+	
+
+
+</mapper>
+  
+  
+  
+  
+  
+  
+  
+  

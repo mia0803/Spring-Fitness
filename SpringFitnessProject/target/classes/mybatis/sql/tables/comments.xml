@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="commentsSqlDAO">
+	
+	<select id="getCommentCount" resultType="int" parameterType="int">
+	select count(*) from comments where post_id=#{post_id}
+	</select>
+	
+	<insert id="addComment" parameterType="CommentDTO">
+	insert into comments values(comments_id_seq.nextval,#{post_id},#{email},#{post_comment},0,comments_id_seq.currval,sysdate)
+	</insert>
+	
+	<insert id="addReply" parameterType="CommentDTO">
+	insert into comments values(comments_id_seq.nextval,#{post_id},#{email},#{post_comment},1,#{original_comment_id},sysdate)
+	</insert>
+	
+	<select id="getComment" resultType="CommentDTO" parameterType="int">
+	select * from comments where post_id=#{post_id} order by original_comment_id desc, comment_date asc
+	</select>
+	
+	<update id="delete"  parameterType="int">
+	update comments set post_comment='This comment was deleted.' where id=#{id}
+	</update>
+	
+	
+
+
+
+</mapper>
+
+  
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="classSqlDAO">
+	
+	<select id="checkDelete" resultType="ClassDTO" parameterType="String">
+	select * from classes where club=#{club}
+	</select>
+	
+	<select id="getTotalCount" resultType="int" parameterType="String">
+	select count(*) from classes where club=#{club}
+	</select>
+	
+	<select id="getClassByDay" resultType="ClassDTO" parameterType="ClassDTO">
+	select * from classes where club=#{club} and c_day=#{c_day} order by c_id asc
+	</select>
+	
+	<select id="getAllClasses" resultType="ClassDTO">
+	select * from classes order by c_id asc
+	</select>
+	
+	<select id="getClass" resultType="ClassDTO" parameterType="int">
+	select * from classes where c_id=#{c_id}
+	</select>
+	
+	<select id="checkCombination" resultType="ClassDTO" parameterType="ClassDTO">
+	select * from classes where c_day=#{c_day} and teacher=#{teacher} and c_time=#{c_time} and club=#{club} 
+	</select>
+	
+	<insert id="addClass" parameterType="ClassDTO">
+	insert into classes values(7,#{c_day},#{title},#{teacher},#{c_time},#{club})
+	</insert>
+	
+	<update id="updateClass" parameterType="ClassDTO">
+	update classes set c_day=#{c_day}, title=#{title}, teacher=#{teacher}, c_time=#{c_time} where c_id = #{c_id}
+	</update>
+	
+	<delete id="deleteClass" parameterType="int">
+	delete from classes where c_id=#{c_id}
+	</delete>
+	
+	
+	
+	
+	
+	
+
+</mapper>
+  
+  
+  
+  
+  
+  
+  
+  

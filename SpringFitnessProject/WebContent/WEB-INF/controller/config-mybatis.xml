@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="callSettersOnNulls" value="true"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias alias="ClassCartDTO" type="com.model.dtogroups.ClassCartDTO"/>
+		<typeAlias alias="ClassDTO" type="com.model.dtogroups.ClassDTO"/>
+		<typeAlias alias="ClubDTO" type="com.model.dtogroups.ClubDTO"/>
+		<typeAlias alias="CommentDTO" type="com.model.dtogroups.CommentDTO"/>
+		<typeAlias alias="MemberDTO" type="com.model.dtogroups.MemberDTO"/>
+		<typeAlias alias="PaymentDTO" type="com.model.dtogroups.PaymentDTO"/>
+		<typeAlias alias="PostDTO" type="com.model.dtogroups.PostDTO"/>
+		<typeAlias alias="RefundDTO" type="com.model.dtogroups.RefundDTO"/>
+		<typeAlias alias="RegionDTO" type="com.model.dtogroups.RegionDTO"/>
+		<typeAlias alias="TransactionDTO" type="com.model.dtogroups.TransactionDTO"/>
+		<typeAlias alias="AllTypeHandler" type="com.model.dtogroups.AllTypeHandler"/>
+	</typeAliases>
+	
+	<typeHandlers>
+	  <typeHandler handler="com.model.dtogroups.AllTypeHandler" javaType="java.util.Map"/>
+	  <package name="com.model.dtogroups.AllTypeHandler"/>
+	</typeHandlers>
+	 
+	<mappers> 
+		<mapper resource="/mybatis/sql/tables/class.xml" />
+		<mapper resource="/mybatis/sql/tables/classCart.xml" />
+		<mapper resource="/mybatis/sql/tables/club.xml" />
+		<mapper resource="/mybatis/sql/tables/comments.xml" />
+		<mapper resource="/mybatis/sql/tables/member.xml" />
+		<mapper resource="/mybatis/sql/tables/payment.xml" />
+		<mapper resource="/mybatis/sql/tables/posts.xml" />
+		<mapper resource="/mybatis/sql/tables/refund.xml" />
+		<mapper resource="/mybatis/sql/tables/region.xml" />
+		<mapper resource="/mybatis/sql/tables/transaction.xml" />
+	</mappers>
+	
+	
+	
+  	<!-- db connection setup through mybatis
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+			  	<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	 -->
+</configuration>
+
+
+	 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="paymentSqlDAO">
+	
+	<insert id="addInfo" parameterType="PaymentDTO">
+	insert into payment_info values(7,#{member_id},#{fname},#{lname},#{country},#{address},#{address2},#{state},#{city},#{postal},#{name_on_card},#{card_number},#{expiration},#{card_postal},#{cvc})
+	</insert>
+	
+	<select id="getId" resultType="int" parameterType="int">
+	select id from payment_info where member_id=#{member_id}
+	</select>
+	
+	<select id="getPaymentInfo" resultType="PaymentDTO" parameterType="int">
+	select * from payment_info where member_id=#{member_id}
+	</select>
+	
+	<update id="update" parameterType="PaymentDTO">
+	update payment_info set fname=#{fname},lname=#{lname},address=#{address},address2=#{address2},state=#{state},city=#{city},postal=#{postal},name_on_card=#{name_on_card},card_number=#{card_number},expiration=#{expiration},card_postal=#{card_postal},cvc=#{cvc} where id=#{id}
+	</update>
+	
+	
+	
+	
+	
+	
+
+</mapper>
+  
+  
+  
+  
+  
+  
+  
+  

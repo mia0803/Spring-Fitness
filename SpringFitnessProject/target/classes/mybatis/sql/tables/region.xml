@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="regionSqlDAO">
+	
+	<resultMap type="[B" id="result">
+		<result column="loc_img" property="loc_img" jdbcType="BLOB" javaType="[B"/>
+	</resultMap>
+	
+	
+	
+	<select id="getAllRegions" resultType="RegionDTO">
+	select id, location, loc_desc from locations order by location asc
+	</select>
+	
+	<select id="getAllRegionImages" resultType="[B">
+	select loc_img from locations order by location asc
+	</select>
+
+	<select id="getRegion" resultType="RegionDTO" parameterType="String">
+	select * from locations where location=#{location}
+	</select>
+	
+	<select id="getImage" resultType="[B" parameterType="String">
+	select loc_img from locations where location=#{location}
+	</select>
+	
+	<insert id="addRegionWithImage" parameterType="RegionDTO">
+	insert into locations values(7,#{location},#{loc_desc},#{byte_img})
+	</insert>
+	
+	<insert id="addRegionWithoutImage" parameterType="RegionDTO">
+	insert into locations values(7,#{location},#{loc_desc}, null)
+	</insert>
+	
+	<update id="updateRegionWithImage" parameterType="RegionDTO">
+	update locations set location = #{location}, loc_desc = #{loc_desc}, loc_img = #{byte_img}
+	where id = #{id}
+	</update>
+	
+	<update id="updateRegionWithoutImage" parameterType="RegionDTO">
+	update locations set location = #{location}, loc_desc = #{loc_desc}, loc_img = null
+	where id = #{id}
+	</update>
+	
+	<delete id="deleteRegion" parameterType="String">
+	delete from locations where location=#{location}
+	</delete>
+	
+	
+	
+	
+	
+	
+
+</mapper>
+
+  
+  
+  
+  
+  
+  
+  

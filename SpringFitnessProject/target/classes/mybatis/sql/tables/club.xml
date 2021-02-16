@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="clubSqlDAO">
+	
+	<select id="getAllClubCount" resultType="int">
+	select count(*) from clubs
+	</select>
+
+	<select id="getRegionClubCount" resultType="int" parameterType="String">
+	select count(*) from clubs where location=#{location}
+	</select>
+	
+	<!-- club_id,club_name,address,phone,location,club_desc -->
+	<select id="getRegionClubs" resultType="ClubDTO" parameterType="String">
+	select * from clubs where location=#{location} order by club_name asc
+	</select>
+	
+	<select id="getAllClubs" resultType="ClubDTO" >
+	select * from clubs order by club_name asc
+	</select>
+	
+	<select id="getClub" resultType="ClubDTO" parameterType="String">
+	select * from clubs where club_name=#{club_name}
+	</select>
+	
+	
+	<update id="updateClub" parameterType="ClubDTO" >
+	update clubs set club_name = #{club_name}, address = #{address}, phone=#{phone}, club_desc=#{club_desc}
+	where club_id = #{club_id}
+	</update>
+	
+	<update id="updateClubImage" parameterType="ClubDTO">
+		<if test="club_img != null">
+		update clubs set club_img = #{img_hmap,javaType=java.util.Map,jdbcType=BLOB,typeHandler=AllTypeHandler} where club_id = #{club_id}
+		</if>
+	</update>
+	
+	<select id="checkClub" resultType="ClubDTO" parameterType="String">
+	select * from clubs where club_name=#{club_name}
+	</select>
+	
+	<!-- blob image with file and inputstream -->
+	<insert id="addClub" parameterType="ClubDTO">
+	insert into clubs values(7,#{club_name},#{address},#{phone},#{location},#{club_desc},#{img_hmap,javaType=java.util.Map,jdbcType=BLOB,typeHandler=AllTypeHandler})
+	</insert>
+	
+	
+	<delete id="deleteClub" parameterType="String">
+	delete from clubs where club_name=#{club_name}
+	</delete>
+
+</mapper>
+
+  
+  
+  
+  
+  
+  
+  

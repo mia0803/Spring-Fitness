@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="postSqlDAO">
+	
+	<select id="getCount" resultType="int">
+	select count(*) from posts where deleted=0
+	</select>
+	
+	<select id="getCountOfSearch" resultType="int" parameterType="String">
+	select count(*) from posts where deleted=0 and title like #{content}
+	</select>
+	
+	<select id="getAllPosts" resultType="PostDTO" parameterType="PostDTO">
+	select * from (select post2.*, rownum r from 
+	(select * from posts where deleted=0 order by announcement desc, id desc) post2 order by rownum) 
+	where r between #{start_num} and #{end_num}
+	</select>
+	
+	<select id="getPostsOfSearch" resultType="PostDTO" parameterType="PostDTO">
+	select * from (select post2.*, rownum r from 
+	(select * from posts where title like #{content} and deleted=0 order by announcement desc, id desc) post2 order by rownum) 
+	where r between #{start_num} and #{end_num}
+	</select>
+	
+	<update id="upView" parameterType="int">
+	update posts set post_view=post_view+1 where id = #{id}
+	</update>
+	
+	<select id="getPost" resultType="PostDTO" parameterType="int">
+	select * from posts where id = #{id}
+	</select>
+	
+	<insert id="addPost" parameterType="PostDTO">
+	insert into posts values(7,#{title},#{email},sysdate,0,#{content},0,#{announcement})
+	</insert>
+	
+	<update id="deletePost" parameterType="int">
+	update posts set deleted=1 where id=#{id}
+	</update>
+	
+	<update id="updatePost" parameterType="PostDTO">
+	update posts set title=#{title}, content=#{content} where id=#{id}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+
+
+</mapper>
+  
+  
+  
+  
+  
+  
+  
+  
